@@ -18,13 +18,6 @@ services:
       - ./http-server/files:/var/www/html/
     restart: always
 
-# networks:
-#   pxe-network:
-#     driver: bridge
-#     ipam:
-#       config:
-#         - subnet: 172.20.0.0/16
-
 # volumes:
 #   tftp-data:
 #   http-data:
