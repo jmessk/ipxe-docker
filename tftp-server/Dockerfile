@@ -1,43 +1,37 @@
-FROM gcc:12.5.0-bookworm
+FROM gcc:12.5.0-bookworm AS builder
 
+RUN apt-get update && apt-get install -y \
+    syslinux \
+    isolinux \
+    mkisofs \
+    gcc-aarch64-linux-gnu
 
+ADD https://github.com/ipxe/ipxe.git /ipxe
+
+WORKDIR /ipxe/src
+
+WORKDIR /ipxe/src
+
+RUN --mount=type=cache,target=/ipxe/src/bin-x86_64-efi \
+    --mount=type=cache,target=/ipxe/src/bin-arm64-efi \
+    make bin-x86_64-efi/ipxe.efi && \
+    make CROSS=aarch64-linux-gnu- bin-arm64-efi/ipxe.efi && \
+    mkdir -p /tmp/build-cache && \
+    cp bin-x86_64-efi/ipxe.efi /tmp/build-cache/ipxe-x86_64.efi && \
+    cp bin-arm64-efi/ipxe.efi /tmp/build-cache/ipxe-arm64.efi
 
 FROM debian:bookworm-slim
 
-ARG UID
-ARG GID
-
 RUN apt-get update && apt-get install -y \
-    tftpd-hpa \
-    wget \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+    tftpd-hpa
 
-WORKDIR /var/lib/tftpboot
+WORKDIR /srv/tftp
 
-RUN wget -q https://boot.ipxe.org/undionly.kpxe && \
-    wget -q https://boot.ipxe.org/ipxe.pxe && \
-    wget -q https://boot.ipxe.org/undionly.kkpxe
+COPY --from=builder /tmp/build-cache/ipxe-x86_64.efi /srv/tftp/
+COPY --from=builder /tmp/build-cache/ipxe-arm64.efi /srv/tftp/
 
-COPY ./boot.ipxe /var/lib/tftpboot/
+RUN chown -R tftp:tftp /srv/tftp && \
+    chmod -R 755 /srv/tftp
 
-ENV TFTP_USERNAME=tftp
-ENV TFTP_DIRECTORY=/var/lib/tftpboot
-ENV TFTP_ADDRESS=0.0.0.0:69
-ENV TFTP_PERMISSIVE=""
-
-RUN groupadd tftp --gid ${GID} && \
-    useradd tftp --uid ${UID} --gid ${GID} \
-    --system \
-    --no-create-home \
-    --shell /bin/false
-
-RUN chown -R tftp:tftp /var/lib/tftpboot && \
-    chmod -R 755 /var/lib/tftpboot
-
-# ヘルスチェック
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD netstat -ulpn | grep :69 || exit 1
-
-# TFTPサーバを起動
-CMD ["in.tftpd", "--foreground", "--user", "tftp", "--address", "0.0.0.0:69", "--secure", "/var/lib/tftpboot"]
+ENTRYPOINT [ "in.tftpd" ]
+CMD ["--foreground"]
