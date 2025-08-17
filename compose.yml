@@ -3,22 +3,20 @@ services:
     build:
       context: ./tftp-server
       dockerfile: Dockerfile
-    # ports:
-    #   - "69:69/udp"
-    network_mode: host
+    ports:
+      - 69:69/udp
     volumes:
       - ./tftp-server/tftpd-hpa:/etc/default/tftpd-hpa
+    restart: always
 
-#   http-server:
-#     build: ./http-server
-#     container_name: pxe-http-server
-#     ports:
-#       - "80:80"
-#     volumes:
-#       - http-data:/var/www/html
-#     networks:
-#       - pxe-network
-#     restart: unless-stopped
+  http-server:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./http-server/nginx.conf:/etc/nginx/nginx.conf
+      - ./http-server/files:/var/www/html/
+    restart: always
 
 # networks:
 #   pxe-network:

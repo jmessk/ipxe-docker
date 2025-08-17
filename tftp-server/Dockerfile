@@ -10,8 +10,6 @@ ADD https://github.com/ipxe/ipxe.git /ipxe
 
 WORKDIR /ipxe/src
 
-WORKDIR /ipxe/src
-
 RUN --mount=type=cache,target=/ipxe/src/bin-x86_64-efi \
     --mount=type=cache,target=/ipxe/src/bin-arm64-efi \
     make bin-x86_64-efi/ipxe.efi && \
