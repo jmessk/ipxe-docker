@@ -15,8 +15,8 @@ CPU アーキテクチャに応じて、異なるブートローダをビルド�
 
 以下は参考です:
 
-<https://ipxe.org/download>
-<https://ipxe.org/appnote/buildtargets>
+- <https://ipxe.org/download>
+- <https://ipxe.org/appnote/buildtargets>
 
 例: x86_64-efi のビルド
 
