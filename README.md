@@ -1,6 +1,12 @@
 # iPXE Docker
 
-## DHCP Settings
+## 利用方法
+
+1. DHCP サーバの設定
+2. ISO イメージの準備
+3. コンテナの起動
+
+## (Required) DHCP Settings
 
 ## Build iPXE Bootloader
 
