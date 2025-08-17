@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  tftp-server:
+    build: ./tftp
+    container_name: pxe-tftp-server
+    ports:
+      - "69:69/udp"
+    volumes:
+      - tftp-data:/var/lib/tftpboot
+    networks:
+      - pxe-network
+    restart: unless-stopped
+
+  http-server:
+    build: ./http-server
+    container_name: pxe-http-server
+    ports:
+      - "80:80"
+    volumes:
+      - http-data:/var/www/html
+    networks:
+      - pxe-network
+    restart: unless-stopped
+
+networks:
+  pxe-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  tftp-data:
+  http-data:
