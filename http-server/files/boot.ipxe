@@ -20,17 +20,17 @@ item reboot             Reboot Computer
 choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
 goto ${selected}
 
-:bootstrap   # ここはインストールしたい OS毎に異なる
+:bootstrap
 kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/bootstrap.ign
 initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
 boot
 
-:master　  # ここはインストールしたい OS毎に異なる
+:master
 kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/master.ign
 initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
 boot
 
-:worker　  # ここはインストールしたい OS毎に異なる
+:worker
 kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/worker.ign
 initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
 boot
