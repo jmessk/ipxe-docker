@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /srv/tftp
 
 # COPY --from=builder /tmp/build-cache/ipxe-x86_64.efi /srv/tftp/
-# COPY --from=builder /tmp/build-cache/ipxe-x86_64.efi /srv/tftp/
+# COPY --from=builder /tmp/build-cache/ipxe-arm64.efi /srv/tftp/
 
 ADD https://boot.ipxe.org/ipxe.efi /srv/tftp/ipxe-x86_64.efi
 ADD https://boot.ipxe.org/arm64-efi/ipxe.efi /srv/tftp/ipxe-arm64.efi
@@ -35,4 +35,4 @@ RUN chown -R tftp:tftp /srv/tftp && \
     chmod -R 755 /srv/tftp
 
 ENTRYPOINT [ "in.tftpd" ]
-CMD ["--foreground"]
+CMD ["--foreground", "--verbose", "--address", "0.0.0.0:69", "--secure", "/srv/tftp/", "--user", "tftp"]
