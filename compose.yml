@@ -9,7 +9,6 @@ services:
     # volumes:
     #   - ./tftp-server/tftpd-hpa:/etc/default/tftpd-hpa
     restart: always
-    tty: true
 
   http-server:
     image: nginx:latest
