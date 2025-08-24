@@ -11,21 +11,21 @@ item --gap --
 item hello                                  Hello world
 
 item --gap --
-item --gap --                               Ubuntu Desktop:
-item install-ubuntu-24.04.2-desktop-amd64   Install Ubuntu 24.04.2 desktop amd64
+item --gap --                               Ubuntu 24.04:
 item install-ubuntu-24.04.3-desktop-amd64   Install Ubuntu 24.04.3 desktop amd64
 item install-ubuntu-24.04.3-desktop-arm64   Install Ubuntu 24.04.3 desktop arm64
+item install-ubuntu-24.04.2-desktop-amd64   Install Ubuntu 24.04.2 desktop amd64
 item --gap --
-item install-ubuntu-22.04.5-desktop-amd64   Install Ubuntu 22.04.5 desktop amd64
-item install-ubuntu-22.04.5-desktop-arm64   Install Ubuntu 22.04.5 desktop arm64
-
-item --gap --
-item --gap --                               Ubuntu Server:
 item install-ubuntu-24.04.3-server-amd64    Install Ubuntu 24.04.3 server amd64
 item install-ubuntu-24.04.3-server-arm64    Install Ubuntu 24.04.3 server arm64
+
 item --gap --
-item install-ubuntu-22.04.5-server-amd64   Install Ubuntu 22.04.5 server amd64
-item install-ubuntu-22.04.5-server-arm64   Install Ubuntu 22.04.5 server arm64
+item --gap --                               Ubuntu 22.04:
+item install-ubuntu-22.04.5-desktop-amd64   Install Ubuntu 22.04.5 desktop amd64
+item install-ubuntu-22.04.5-desktop-arm64   Install Ubuntu 22.04.5 desktop arm64
+item --gap --
+item install-ubuntu-22.04.5-server-amd64    Install Ubuntu 22.04.5 server amd64
+item install-ubuntu-22.04.5-server-arm64    Install Ubuntu 22.04.5 server arm64
 
 item --gap --
 item --gap --                               Other Options:
