@@ -1,54 +1,19 @@
-# !ipxe
+#!ipxe
 
-# dhcp
-# Some menu defaults
-set menu-timeout 300000
-isset ${menu-default} || set menu-default exit
+:MENU
+menu
+item --gap -- ---------------- iPXE boot menu ----------------
+item hello        Hello world
+item shell          ipxe shell
+choose --default return --timeout 5000 target && goto ${target}
 
-
-:start
-
-menu Please choose an type of node you want to install
-item --gap --           -------------------------- node type -------------------------
-item --key b bootstrap  Install Bootstrap Node
-item --key m master     Install Master Node
-item --key w worker     Install Worker Node
-item --gap --           -------------------------- Advanced Option --------------------
-item --key c config     Configure settings
-item shell              Drop to iPXE shell
-item reboot             Reboot Computer
-choose --timeout ${menu-timeout} --default ${menu-default} selected || goto cancel
-goto ${selected}
-
-:bootstrap
-kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/bootstrap.ign
-initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
-boot
-
-:master
-kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/master.ign
-initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
-boot
-
-:worker
-kernel  http://192.2.0.101/rhcos-4.5.6-x86_64-installer-kernel-x86_64 ip=dhcp rd.neednet=1 initrd=rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img console=tty0 console=ttyS0 coreos.inst=yes coreos.inst.install_dev=sda coreos.inst.image_url=http://192.2.0.101/rhcos-4.5.6-x86_64-metal.x86_64.raw.gz coreos.inst.ignition_url=http://192.2.0.101/worker.ign
-initrd http://192.2.0.101/rhcos-4.5.6-x86_64-installer-initramfs.x86_64.img
-boot
-
-:exit
-exit
-
-:cancel
-echo You cancelled the menu, dropping you to a shell
+:hello
+echo "hello world"
+boot ||
+goto MENU
 
 :shell
-echo Type 'exit' to get the back to the menu
-shell
-set menu-timeout 0
-goto start
+shell ||
+goto MENU
 
-:reboot
-reboot
-
-:exit
-exit
+autoboot
