@@ -1,1 +1,6 @@
-/http-server/files/iso/*.iso
+/tftp-server/files/*efi
+
+*.iso
+initrd
+vmlinuz
+linux

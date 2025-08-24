@@ -1,19 +1,50 @@
 #!ipxe
 
+set server-url http://172.16.0.1
+
+
+
 :MENU
-menu
-item --gap -- ---------------- iPXE boot menu ----------------
-item hello        Hello world
-item shell          ipxe shell
-choose --default return --timeout 5000 target && goto ${target}
+menu iPXE Boot Menu
+
+item --gap --
+item --gap --                               iPXE Boot Menu:
+item hello                                  Hello world
+item install-ubuntu-24.04.2-desktop-amd64   Install Ubuntu 24.04.2 desktop amd64
+
+item --gap --
+item --gap --                               Other Options:
+item shell                                  iPXE shell
+item exit                                   Exit iPXE boot
+item reboot                                 Reboot the system
+
+choose target && goto ${target}
+
+
+
+# Boot Options
 
 :hello
-echo "hello world"
-boot ||
+echo "Hello, world."
+sleep 1
 goto MENU
+
+:install-ubuntu-24.04.2-desktop-amd64
+set base-url ${server-url}/os/ubuntu/24.04.2/desktop/amd64
+echo Booting Ubuntu 24.04.2 desktop amd64 installer
+kernel ${base-url}/vmlinuz ip=dhcp url=${base-url}/ubuntu-24.04.2-desktop-amd64.iso ---
+initrd ${base-url}/initrd
+boot || goto MENU
+
+
+
+# Other Options
 
 :shell
-shell ||
-goto MENU
+shell || goto MENU
 
-autoboot
+:exit
+exit
+
+:reboot
+reboot

@@ -6,8 +6,9 @@ services:
     # ports:
     #   - 69:69/udp
     network_mode: host
-    # volumes:
-    #   - ./tftp-server/tftpd-hpa:/etc/default/tftpd-hpa
+    volumes:
+      # - ./tftp-server/tftpd-hpa:/etc/default/tftpd-hpa
+      - ./tftp-server/files:/srv/tftp
     restart: always
 
   http-server:

@@ -2,3 +2,5 @@ TFTP_USERNAME="tftp"
 TFTP_DIRECTORY="/srv/tftp/"
 TFTP_ADDRESS="0.0.0.0:69"
 TFTP_OPTIONS="-s --verbose"
+
+# currently this file is not being used
