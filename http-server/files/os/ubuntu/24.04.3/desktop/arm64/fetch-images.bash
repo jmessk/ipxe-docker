@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname -- "${BASH_SOURCE[0]}")"
 
-need() {
+fetch() {
 	local file="$1" url="$2"
 
 	if [[ -f $file ]]; then
@@ -18,8 +18,8 @@ need() {
 	mv "$file.tmp" "$file"
 }
 
-need initrd https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/initrd
-need vmlinuz https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/linux
-need ubuntu-24.04.3-desktop-arm64.iso https://cdimage.ubuntu.com/releases/24.04.3/release/ubuntu-24.04.3-desktop-arm64.iso
+fetch initrd https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/initrd
+fetch vmlinuz https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/linux
+fetch ubuntu-24.04.3-desktop-arm64.iso https://cdimage.ubuntu.com/releases/24.04.3/release/ubuntu-24.04.3-desktop-arm64.iso
 
 echo "Done." >&2

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-# This script is for ubuntu-24.04.3-live-server-amd64
+# This script is for ubuntu-22.04.5-live-server-amd64
 
 cd "$(dirname -- "${BASH_SOURCE[0]}")"
 
@@ -18,8 +18,8 @@ fetch() {
 	mv "$file.tmp" "$file"
 }
 
-fetch initrd https://releases.ubuntu.com/24.04.3/netboot/amd64/initrd
-fetch vmlinuz https://releases.ubuntu.com/24.04.3/netboot/amd64/linux
-fetch ubuntu-24.04.3-live-server-amd64.iso https://releases.ubuntu.com/releases/24.04/ubuntu-24.04.3-live-server-amd64.iso
+fetch initrd https://releases.ubuntu.com/22.04.5/netboot/amd64/initrd
+fetch vmlinuz https://releases.ubuntu.com/22.04.5/netboot/amd64/linux
+fetch ubuntu-22.04.5-live-server-amd64.iso https://releases.ubuntu.com/releases/22.04/ubuntu-22.04.5-live-server-amd64.iso
 
 echo "Done." >&2

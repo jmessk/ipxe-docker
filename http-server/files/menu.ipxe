@@ -46,14 +46,47 @@ goto MENU
 
 
 
-# Ubuntu Desktop
+# Ubuntu 24.04
 
 :install-ubuntu-24.04.2-desktop-amd64
 set base-url ${server-url}/os/ubuntu/24.04.2/desktop/amd64
-echo Booting Ubuntu 24.04.2 desktop amd64 installer
-kernel ${base-url}/vmlinuz ip=dhcp url=${base-url}/ubuntu-24.04.2-desktop-amd64.iso ---
-initrd ${base-url}/initrd
-boot || goto MENU
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-24.04.3-desktop-amd64
+set base-url ${server-url}/os/ubuntu/24.04.3/desktop/amd64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-24.04.3-desktop-arm64
+set base-url ${server-url}/os/ubuntu/24.04.3/desktop/arm64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-24.04.3-server-amd64
+set base-url ${server-url}/os/ubuntu/24.04.3/server/amd64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-24.04.3-server-arm64
+set base-url ${server-url}/os/ubuntu/24.04.3/server/arm64
+chain ${base-url}/boot.ipxe || goto MENU
+
+
+
+# Ubuntu 22.04
+
+:install-ubuntu-22.04.5-desktop-amd64
+set base-url ${server-url}/os/ubuntu/22.04.5/desktop/amd64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-22.04.5-desktop-arm64
+set base-url ${server-url}/os/ubuntu/22.04.5/desktop/arm64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-22.04.5-server-amd64
+set base-url ${server-url}/os/ubuntu/22.04.5/server/amd64
+chain ${base-url}/boot.ipxe || goto MENU
+
+:install-ubuntu-22.04.5-server-arm64
+set base-url ${server-url}/os/ubuntu/22.04.5/server/arm64
+chain ${base-url}/boot.ipxe || goto MENU
 
 
 

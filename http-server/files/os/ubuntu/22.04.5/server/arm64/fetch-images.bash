@@ -1,0 +1,25 @@
+#!/bin/bash
+set -euo pipefail
+
+# This script is for ubuntu-22.04.5-live-server-arm64
+
+cd "$(dirname -- "${BASH_SOURCE[0]}")"
+
+fetch() {
+	local file="$1" url="$2"
+
+	if [[ -f $file ]]; then
+		echo "Already exists, skipping: $file"
+		return
+	fi
+
+    echo "Downloading ${url} -> ${file}" >&2
+	curl -L --fail -o "$file.tmp" "$url"
+	mv "$file.tmp" "$file"
+}
+
+fetch initrd https://cdimage.ubuntu.com/releases/22.04.5/release/netboot/arm64/initrd
+fetch vmlinuz https://cdimage.ubuntu.com/releases/22.04.5/release/netboot/arm64/linux
+fetch ubuntu-22.04.5-live-server-arm64.iso https://cdimage.ubuntu.com/releases/22.04.5/release/ubuntu-22.04.5-live-server-arm64.iso
+
+echo "Done." >&2
