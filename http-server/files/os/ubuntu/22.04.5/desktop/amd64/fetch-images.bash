@@ -18,8 +18,8 @@ fetch() {
 	mv "$file.tmp" "$file"
 }
 
-fetch initrd https://releases.ubuntu.com/releases/22.04.5/netboot/amd64/initrd
-fetch vmlinuz https://releases.ubuntu.com/releases/22.04.5/netboot/amd64/linux
+# fetch initrd https://releases.ubuntu.com/releases/22.04.5/netboot/amd64/initrd
+# fetch vmlinuz https://releases.ubuntu.com/releases/22.04.5/netboot/amd64/linux
 fetch ubuntu-22.04.5-desktop-amd64.iso https://releases.ubuntu.com/releases/22.04.5/ubuntu-22.04.5-desktop-amd64.iso
 
 echo "Done." >&2

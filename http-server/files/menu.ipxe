@@ -14,7 +14,7 @@ item --gap --
 item --gap --                               Ubuntu 24.04:
 item install-ubuntu-24.04.3-desktop-amd64   Install Ubuntu 24.04.3 desktop amd64
 item install-ubuntu-24.04.3-desktop-arm64   Install Ubuntu 24.04.3 desktop arm64
-item install-ubuntu-24.04.2-desktop-amd64   Install Ubuntu 24.04.2 desktop amd64
+# item install-ubuntu-24.04.2-desktop-amd64   Install Ubuntu 24.04.2 desktop amd64
 item --gap --
 item install-ubuntu-24.04.3-server-amd64    Install Ubuntu 24.04.3 server amd64
 item install-ubuntu-24.04.3-server-arm64    Install Ubuntu 24.04.3 server arm64
@@ -48,9 +48,9 @@ goto MENU
 
 # Ubuntu 24.04
 
-:install-ubuntu-24.04.2-desktop-amd64
-set base-url ${server-url}/os/ubuntu/24.04.2/desktop/amd64
-chain ${base-url}/boot.ipxe || goto MENU
+# :install-ubuntu-24.04.2-desktop-amd64
+# set base-url ${server-url}/os/ubuntu/24.04.2/desktop/amd64
+# chain ${base-url}/boot.ipxe || goto MENU
 
 :install-ubuntu-24.04.3-desktop-amd64
 set base-url ${server-url}/os/ubuntu/24.04.3/desktop/amd64

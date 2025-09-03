@@ -1,5 +1,6 @@
 /tftp-server/files/*efi
 
+*.tmp
 *.iso
 initrd
 vmlinuz
