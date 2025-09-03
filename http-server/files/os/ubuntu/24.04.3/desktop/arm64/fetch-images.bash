@@ -22,4 +22,5 @@ fetch initrd https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/i
 fetch vmlinuz https://cdimage.ubuntu.com/releases/24.04.3/release/netboot/arm64/linux
 fetch ubuntu-24.04.3-desktop-arm64.iso https://cdimage.ubuntu.com/releases/24.04.3/release/ubuntu-24.04.3-desktop-arm64.iso
 
+
 echo "Done." >&2

@@ -2,6 +2,6 @@
 
 echo Booting Ubuntu 24.04.3 desktop amd64 installer
 
-kernel ${base-url}/vmlinuz ip=dhcp url=${base-url}/ubuntu-24.04.3-desktop-amd64.iso ---
+kernel ${base-url}/vmlinuz  ip=dhcp url=${base-url}/ubuntu-24.04.3-desktop-amd64.iso ---
 initrd ${base-url}/initrd
 boot || goto MENU

@@ -21,5 +21,12 @@ fetch() {
 fetch initrd https://releases.ubuntu.com/24.04.3/netboot/amd64/initrd
 fetch vmlinuz https://releases.ubuntu.com/24.04.3/netboot/amd64/linux
 fetch ubuntu-24.04.3-live-server-amd64.iso https://releases.ubuntu.com/releases/24.04/ubuntu-24.04.3-live-server-amd64.iso
+fetch SHA256SUMS https://releases.ubuntu.com/releases/24.04.3/SHA256SUMS
+
+echo "Fetch Done."
+
+echo "Verifying ISO checksum..." >&2
+grep ubuntu-24.04.3-live-server-amd64.iso SHA256SUMS | sha256sum -c -
+echo "ISO checksum OK." >&2
 
 echo "Done." >&2
