@@ -1,6 +1,6 @@
 #!ipxe
 
-set server-url http://192.168.10.1
+set server-url http://192.168.10.1:8080
 
 
 
